@@ -86,4 +86,15 @@ public enum ChiffresParUnite {
 		return cinqUniteChiffreArabe;
 	}
 
+	/**
+	 * recupere le chiffre romain depuis l'unité (dizaine,centaine etc...)
+	 * 
+	 * @param unite
+	 * @return chiffre romain ou throw exception si pas trouvée
+	 * @throws Exception
+	 */
+	public static ChiffresParUnite recupererChiffreRomainDepuisUnite(final int unite) throws Exception {
+		// se base sur l'ordre de declaration de l'enum !
+		return ChiffresParUnite.values()[unite];
+	}
 }

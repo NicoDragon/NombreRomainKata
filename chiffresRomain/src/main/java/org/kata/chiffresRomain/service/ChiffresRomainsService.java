@@ -7,12 +7,11 @@ package org.kata.chiffresRomain.service;
 public interface ChiffresRomainsService {
 
 	/**
-	 * conversion 
+	 * conversion des nombres arabes vers nombres romain
 	 * @param nombre
 	 * @return
 	 * @throws Exception
 	 */
 	String convertirNombreArabeVersNombreRomain(String nombre) throws Exception;
 	
-	String convertirNombreRomainVersNombreArabe(String nombreRomain);
 }

@@ -1,28 +1,27 @@
 package org.kata.chiffresRomain.service.impl;
 
+import org.kata.chiffresRomain.ChiffresParUnite;
+
 public class ConversionNombreArabeVersNombreRomainService {
 
+	NombreService nombreService=new NombreService();
 	/**
 	 * service de conversion d'un nombre en nombre romain
 	 * @param chiffresRomainsServiceImpl TODO
 	 * @param nombre TODO
 	 * 
 	 */
-	public String convertirEnNombreRomainDepuisNombreArabe(ChiffresRomainsServiceImpl chiffresRomainsServiceImpl, String nombre) throws Exception {
-		// todo checker entree
-		chiffresRomainsServiceImpl.nombreService.verifierNombreAvantConversionRomain(nombre);
-	
+	public String convertirEnNombreRomainDepuisNombreArabe( String nombre) throws Exception {
 		String resultat = "";
 	
 		// le i va nous indiquer l'unité
 		for (int i = 0; i < nombre.length(); i++) {
 			int index = i;
-			String chiffre = chiffresRomainsServiceImpl.nombreService.recupererChiffreDepuisNombre(nombre, index);
-	
-			int unite = chiffresRomainsServiceImpl.nombreService.calculerUniteAPartirIndexIteration(nombre, index);
+			String chiffre = nombreService.recupererChiffreDepuisNombre(nombre, index);
+			int unite = nombreService.calculerUniteAPartirIndexIteration(nombre, index);
 	
 			// le second paramètre donne les dizaines/centaines/milliers
-			resultat += convertirChiffreEnChiffreRomain(chiffresRomainsServiceImpl, chiffre, unite);
+			resultat += convertirChiffreArabeEnChiffreRomain( chiffre, unite);
 		}
 	
 		return resultat;
@@ -36,11 +35,11 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @return
 	 * @throws Exception
 	 */
-	private String convertirChiffreEnChiffreRomain(ChiffresRomainsServiceImpl chiffresRomainsServiceImpl, String chiffre, int unite) throws Exception {
+	private String convertirChiffreArabeEnChiffreRomain( String chiffre, int unite) throws Exception {
 		String resultat = null;
-		String chiffreUniteRomain = chiffresRomainsServiceImpl.recupererChiffreRomainDepuisUnite(unite).getUneUniteRomaine();
-		String chiffreCinqUnitesRomain = chiffresRomainsServiceImpl.recupererChiffreRomainDepuisUnite(unite).getCinqUniteRomaine();
-		resultat = chiffresRomainsServiceImpl.conversionNombreArabeVersNombreRomainsService.convertirChiffreArabeEnChiffreRomainPourUniteDonnees(chiffresRomainsServiceImpl, chiffre, unite, chiffreUniteRomain, chiffreCinqUnitesRomain);
+		String chiffreUniteRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite).getUneUniteRomaine();
+		String chiffreCinqUnitesRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite).getCinqUniteRomaine();
+		resultat = convertirChiffreArabeEnChiffreRomainPourUniteDonnees( chiffre, unite, chiffreUniteRomain, chiffreCinqUnitesRomain);
 		return resultat;
 	}
 
@@ -58,7 +57,7 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @return le chiffre en chiffre romain
 	 * @throws Exception
 	 */
-	String convertirChiffreArabeEnChiffreRomainPourUniteDonnees(ChiffresRomainsServiceImpl chiffresRomainsServiceImpl, String chiffre, int unite, String chiffreUniteRomain, String chiffreCinqUnitesRomain) throws Exception {
+	String convertirChiffreArabeEnChiffreRomainPourUniteDonnees( String chiffre, int unite, String chiffreUniteRomain, String chiffreCinqUnitesRomain) throws Exception {
 		String resultat = null;
 	
 		switch (chiffre) {
@@ -95,7 +94,7 @@ public class ConversionNombreArabeVersNombreRomainService {
 			resultat = chiffreCinqUnitesRomain + chiffreUniteRomain + chiffreUniteRomain + chiffreUniteRomain;
 			break;
 		case "9":
-			String chiffreUniteRomainSuperieur = chiffresRomainsServiceImpl.recupererChiffreRomainDepuisUnite(unite + 1).getUneUniteRomaine();
+			String chiffreUniteRomainSuperieur = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite + 1).getUneUniteRomaine();
 			resultat = chiffreUniteRomain + chiffreUniteRomainSuperieur;
 			break;
 		default:
