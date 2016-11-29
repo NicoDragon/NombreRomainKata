@@ -24,7 +24,6 @@ public class ChiffresRomainsServiceImpl implements ChiffresRomainsService {
 	 * 
 	 */
 	public String convertirNombreArabeVersNombreRomain(String nombre) throws Exception {
-		// todo checker entree
 		nombreService.verifierNombreAvantConversionRomain(nombre);
 		return conversionNombreArabeVersNombreRomainsService.convertirEnNombreRomainDepuisNombreArabe(nombre);
 	}

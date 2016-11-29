@@ -8,18 +8,18 @@ import org.junit.Assert;
  */
 public enum ChiffresParUnite {
 	/*  */
-	UNITE("I", "V", "1", "5"), 
+	UNITE("I", "V", "1", "5"),
 	/* dizaine */
-	DIZAINE("X", "L", "10", "50"), CENTAINE("C", "D", "100", "500"), MILLIER("M", "M",
-			"1000", "1000");
+	DIZAINE("X", "L", "10", "50"),
+	/* centaine */
+	CENTAINE("C", "D", "100", "500"),
+	/* millier */
+	MILLIER("M", "M", "1000", "1000");
 
-	/**
-	 * chiffre romain pour une unité
-	 */
+	/* chiffre romain pour une unité */
 	String uneUniteRomaine;
-	/**
-	 * chiffre romain pour cinq unités
-	 */
+	
+	/* chiffre romain pour cinq unités */
 	String cinqUniteRomaine;
 
 	/* chiffre arabe pour une unité */
@@ -51,36 +51,37 @@ public enum ChiffresParUnite {
 			}
 		}
 
-		Assert.fail("pas possible d'avoir aucun résultat" + chiffreRomain);
+		assert false :"impossible de trouver aucun resultat";
 		return null;
 
 	}
+
 	/**
-	 * permet de recuperer le chiffre arabe associé à ce chiffre romain pour cette unité
+	 * permet de recuperer le chiffre arabe associé à ce chiffre romain pour
+	 * cette unité
+	 * 
 	 * @param chiffreRomain
 	 * @return
 	 */
-	public int recupererChiffreArabeAssocie(final String chiffreRomain){
-		if(uneUniteRomaine.equalsIgnoreCase(chiffreRomain)){
+	public int recupererChiffreArabeAssocie(final String chiffreRomain) {
+		if (uneUniteRomaine.equalsIgnoreCase(chiffreRomain)) {
 			return Integer.valueOf(uneUniteChiffreArabe);
-		}else{
+		} else {
 			return Integer.valueOf(cinqUniteChiffreArabe);
 		}
 	}
+
 	public String getUneUniteRomaine() {
 		return uneUniteRomaine;
 	}
-
 
 	public String getCinqUniteRomaine() {
 		return cinqUniteRomaine;
 	}
 
-
 	public String getUneUniteChiffreArabe() {
 		return uneUniteChiffreArabe;
 	}
-
 
 	public String getCinqUniteChiffreArabe() {
 		return cinqUniteChiffreArabe;

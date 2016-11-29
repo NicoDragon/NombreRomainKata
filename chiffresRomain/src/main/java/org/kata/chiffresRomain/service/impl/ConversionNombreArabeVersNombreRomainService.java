@@ -1,53 +1,61 @@
 package org.kata.chiffresRomain.service.impl;
 
 import org.kata.chiffresRomain.ChiffresParUnite;
-
+/**
+ * service de conversion des nombres arabes vers les nombres romains
+ * @author MSI
+ *
+ */
 public class ConversionNombreArabeVersNombreRomainService {
+	
+	/* passer en singletion et utiliser CDI de jee pour injecter */
+	NombreService nombreService = new NombreService();
 
-	NombreService nombreService=new NombreService();
 	/**
 	 * service de conversion d'un nombre en nombre romain
-	 * @param chiffresRomainsServiceImpl TODO
-	 * @param nombre TODO
 	 * 
+	 * @param nombre
+	 *            
 	 */
-	public String convertirEnNombreRomainDepuisNombreArabe( String nombre) throws Exception {
+	public String convertirEnNombreRomainDepuisNombreArabe(final String nombre) throws Exception {
 		String resultat = "";
-	
+
 		// le i va nous indiquer l'unité
-		for (int i = 0; i < nombre.length(); i++) {
-			int index = i;
+		for (int index = 0; index < nombre.length(); index++) {
 			String chiffre = nombreService.recupererChiffreDepuisNombre(nombre, index);
 			int unite = nombreService.calculerUniteAPartirIndexIteration(nombre, index);
-	
+
 			// le second paramètre donne les dizaines/centaines/milliers
-			resultat += convertirChiffreArabeEnChiffreRomain( chiffre, unite);
+			resultat += convertirChiffreArabeEnChiffreRomain(chiffre, unite);
 		}
-	
+
 		return resultat;
 	}
 
 	/**
 	 * 
-	 * @param chiffresRomainsServiceImpl TODO
+	 * @param chiffresRomainsServiceImpl
+	 *            TODO
 	 * @param chiffre
 	 * @param unite
 	 * @return
 	 * @throws Exception
 	 */
-	private String convertirChiffreArabeEnChiffreRomain( String chiffre, int unite) throws Exception {
+	private String convertirChiffreArabeEnChiffreRomain(final String chiffre, final int unite) throws Exception {
 		String resultat = null;
+		/* on appelle deux fois la methode mais je trouve cela plus explicite */
 		String chiffreUniteRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite).getUneUniteRomaine();
-		String chiffreCinqUnitesRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite).getCinqUniteRomaine();
-		resultat = convertirChiffreArabeEnChiffreRomainPourUniteDonnees( chiffre, unite, chiffreUniteRomain, chiffreCinqUnitesRomain);
+		String chiffreCinqUnitesRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite)
+				.getCinqUniteRomaine();
+		resultat = convertirChiffreArabeEnChiffreRomainPourUniteDonnee(chiffre, unite, chiffreUniteRomain,
+				chiffreCinqUnitesRomain);
 		return resultat;
 	}
 
 	/**
 	 * converti un chiffre en chiffre romain
 	 * 
-	 * @param chiffresRomainsServiceImpl TODO
-	 * @param chiffre
+	 * @param chiffreArabe
 	 * @param unite
 	 *            indiquant dizaine,centaine,millier
 	 * @param chiffreUniteRomain
@@ -57,10 +65,11 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @return le chiffre en chiffre romain
 	 * @throws Exception
 	 */
-	String convertirChiffreArabeEnChiffreRomainPourUniteDonnees( String chiffre, int unite, String chiffreUniteRomain, String chiffreCinqUnitesRomain) throws Exception {
+	public String convertirChiffreArabeEnChiffreRomainPourUniteDonnee(final String chiffreArabe, final int unite,
+			final String chiffreUniteRomain, String chiffreCinqUnitesRomain) throws Exception {
 		String resultat = null;
-	
-		switch (chiffre) {
+
+		switch (chiffreArabe) {
 		case "0":
 			resultat = "";
 			break;
@@ -94,10 +103,12 @@ public class ConversionNombreArabeVersNombreRomainService {
 			resultat = chiffreCinqUnitesRomain + chiffreUniteRomain + chiffreUniteRomain + chiffreUniteRomain;
 			break;
 		case "9":
-			String chiffreUniteRomainSuperieur = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite + 1).getUneUniteRomaine();
+			String chiffreUniteRomainSuperieur = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite + 1)
+					.getUneUniteRomaine();
 			resultat = chiffreUniteRomain + chiffreUniteRomainSuperieur;
 			break;
 		default:
+			assert false : "erreur dans le parametre :" + chiffreArabe;
 			break;
 		}
 		return resultat;
