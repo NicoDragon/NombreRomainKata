@@ -94,7 +94,7 @@ public enum ChiffresParUnite {
 	 * @return chiffre romain ou throw exception si pas trouvée
 	 * @throws Exception
 	 */
-	public static ChiffresParUnite recupererChiffreRomainDepuisUnite(final int unite) throws Exception {
+	public static ChiffresParUnite recupererChiffreRomainDepuisUnite(final int unite)  {
 		// se base sur l'ordre de declaration de l'enum !
 		return ChiffresParUnite.values()[unite];
 	}

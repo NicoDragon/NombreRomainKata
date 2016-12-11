@@ -1,5 +1,6 @@
 package org.kata.chiffresRomain.service.impl;
 
+import org.kata.chiffresRomain.exception.DonneesEntreesException;
 import org.kata.chiffresRomain.service.ChiffresRomainsService;
 
 /**
@@ -23,7 +24,7 @@ public class ChiffresRomainsServiceImpl implements ChiffresRomainsService {
 	 * 
 	 * 
 	 */
-	public String convertirNombreArabeVersNombreRomain(String nombre) throws Exception {
+	public String convertirNombreArabeVersNombreRomain(String nombre) throws DonneesEntreesException {
 		nombreService.verifierNombreAvantConversionRomain(nombre);
 		return conversionNombreArabeVersNombreRomainsService.convertirEnNombreRomainDepuisNombreArabe(nombre);
 	}

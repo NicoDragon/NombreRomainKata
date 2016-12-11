@@ -17,7 +17,7 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @param nombre
 	 *            
 	 */
-	public String convertirEnNombreRomainDepuisNombreArabe(final String nombre) throws Exception {
+	public String convertirEnNombreRomainDepuisNombreArabe(final String nombre)  {
 		String resultat = "";
 
 		// le i va nous indiquer l'unité
@@ -41,7 +41,7 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @return
 	 * @throws Exception
 	 */
-	private String convertirChiffreArabeEnChiffreRomain(final String chiffre, final int unite) throws Exception {
+	private String convertirChiffreArabeEnChiffreRomain(final String chiffre, final int unite)  {
 		String resultat = null;
 		/* on appelle deux fois la methode mais je trouve cela plus explicite */
 		String chiffreUniteRomain = ChiffresParUnite.recupererChiffreRomainDepuisUnite(unite).getUneUniteRomaine();
@@ -66,7 +66,7 @@ public class ConversionNombreArabeVersNombreRomainService {
 	 * @throws Exception
 	 */
 	public String convertirChiffreArabeEnChiffreRomainPourUniteDonnee(final String chiffreArabe, final int unite,
-			final String chiffreUniteRomain, String chiffreCinqUnitesRomain) throws Exception {
+			final String chiffreUniteRomain, String chiffreCinqUnitesRomain) {
 		String resultat = null;
 
 		switch (chiffreArabe) {
